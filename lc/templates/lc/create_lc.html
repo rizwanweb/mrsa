@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <br>
+    <center>
+        <h1>Add New Consignment</h1>
+    </center>
+
+    <form class="row g-3" action="" method="post">
+        {% csrf_token %}
+
+        <div class="col-md-4">
+        <label for="">Client</label>
+            {% render_field form.client class="form-control" %}
+        </div>
+        <div class="col-md-2">
+        <label for="">GD Type</label>
+            {% render_field form.gdType class="form-control" %}
+        </div>
+        <div class="col-md-2">
+            <label for="">Port</label>
+            {% render_field form.port class="form-control" %}
+        </div>
+        <div class="col-md-4">
+            <label for="">Item</label>
+            {% render_field form.item class="form-control" %}
+        </div>
+
+        <div class="col-md-2">
+            <label for="">Total Quantity (LC)</label>
+            {% render_field form.totalQuantity class="form-control" %}
+        </div>
+        <div class="col-md-3">
+            <label for="">Vessel</label>
+            {% render_field form.vessel class="form-control" %}
+        </div>
+        <div class="col-md-2">
+            <label for="">IGM#</label>
+            {% render_field form.igm class="form-control" %}
+        </div>
+        <div class="col-md-2">
+            <label for="">IGM Date</label>
+            {% render_field form.igmDate|attr:"data-mask:00-00-0000" placeholder="dd-mm-yyyy" class="form-control" %}
+        </div>
+        <div class="col-md-3">
+            <label for="">Total B/L</label>
+            {% render_field form.totalBL class="form-control" %}
+        </div>
+
+        <div class="col-md-4">
+            <label for="">LC #</label>
+            {% render_field form.lcNo class="form-control" %}
+        </div>
+        <div class="col-md-2">
+            <label for="">LC Date</label>
+            {% render_field form.lcDate|attr:"data-mask:00-00-0000" placeholder="dd-mm-yyyy" class="form-control" %}
+        </div>
+        <div class="col-md-2">
+            <label for="">Declare Value</label>
+            {% render_field form.dv class="form-control" %}
+        </div>
+        <div class="col-md-2">
+            <label for="">Assesed Value</label>
+            {% render_field form.av class="form-control" %}
+        </div>
+        <div class="col-md-2">
+            <label for="">Exchange Rate</label>
+            {% render_field form.exRate class="form-control" %}
+        </div>
+
+        <div class="col-md-4">
+            <label for="">Insurance</label>
+            {% render_field form.insurance class="form-control" %}
+        </div>
+        <div class="col-md-4">
+            <label for="">Port Qasim Authority Rate</label>
+            {% render_field form.pqaRate class="form-control" %}
+        </div>
+        <div class="col-md-4">
+            <label class="form-check-label" for="">Include PSQC Charges</label>
+            {% render_field form.psqc class="form-check-input" %}
+        </div>        
+
+        <div class="">
+            <center><button class="btn btn-lg btn-primary" type="submit">Submit</button>
+            <a class="btn btn-lg btn-secondary" href="{% url 'lc_list' %}">Cancel</a></center>
+        </div> 
+        
+    </form>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+<script>
+$(document).ready(function(){
+    console.log("hello")
+    $("#id_igmDate").mask('00-00-0000', {placeholder: "dd-mm-yyyy"});
+    
+})
+</script>
+{% endblock content %}

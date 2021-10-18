@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<br>
+<center><h1>Clients List</h1></center>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Contact Person</th>
+        <th>Mobile</th>
+        <th>Email</th>
+        <th>City</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for client in clients %}
+    
+    <tr>
+        <td>{{client.name}}</td>
+        <td>{{client.person}}</td>
+        <td>{{client.mobile}}</td>
+        <td>{{client.email}}</td>
+        <td>{{client.city}}</td>
+        <td><a class="btn btn-primary" href="{% url 'update_client' client.id %}">EDIT</a></td>
+        <td><a class="btn btn-primary" href="{% url 'client_detail' client.id %}">VIEW</a></td>
+    </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock content %}

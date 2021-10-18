@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<br>
+<center><h1>Add B/L Details</h1></center>
+<div class="container">
+<form class="row g-sm-3" action="" method="post">
+{% csrf_token %}
+        {% for hidden in formset.hidden_fields %}
+        {{hidden}}
+        {% endfor %}
+        {{formset.management_form}}
+
+{% for form in formset %}
+        <div class="col-sm-2">
+        <label for="">B/L #</label>
+            {{form.id}}{% render_field form.blNo class="form-control" %}
+        </div>
+        <div class="col-sm-2">
+        <label for="">B/L Date</label>
+            {% render_field form.blDate class="form-control" %}
+        </div>
+        <div class="col-sm-2">
+        <label for="">Quantity #</label>
+            {% render_field form.quantity class="form-control" %}
+        </div>
+        <div class="col-sm-1">
+        <label for="">Index #</label>
+            {% render_field form.index class="form-control" %}
+        </div>
+        <div class="col-sm-2">
+        <label for="">Rate of Warehouse</label>
+            {% render_field form.whRate class="form-control" %}
+        </div>
+        <div class="col-sm-2">
+        <label for="">Rate of Excise</label>
+            {% render_field form.exciseRate class="form-control" %}
+        </div>
+{% endfor %}
+
+<div class="col-md-12">
+<center><button class="btn btn-lg btn-primary" type="submit">Submit</button></center>
+</div>
+
+</form>
+</div>
+
+
+{% endblock content %}

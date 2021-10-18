@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+<div class="container">
+    <br>
+
+
+    <center>
+        <h1>Add New Client</h1>
+    </center>
+
+    <form class="row g-3" action="" method="post">
+        {% csrf_token %}
+
+        <div class="col-md-6">
+            <label for="">Party Name:</label>
+            {% render_field form.name class="form-control" %}
+        </div>
+        <div class="col-md-6">
+            <label for="">Contact Person:</label>
+            {% render_field form.person class="form-control" %}
+        </div>
+
+        <div class="col-md-4">
+            <label for="">Mobile Number:</label>
+            {% render_field form.mobile class="form-control" %}
+        </div>
+
+        <div class="col-md-4">
+            <label for="">Phone Number:</label>
+            {% render_field form.phone class="form-control" %}
+        </div>
+
+        <div class="col-md-4">
+            <label for="">Email Address:</label>
+            {% render_field form.email class="form-control" %}
+        </div>
+
+        <div class="col-md-12">
+            <label for="">Address 1:</label>
+            {% render_field form.address class="form-control" %}
+        </div>
+        <div class="col-md-12">
+            <label for="">Address 2:</label>
+            {% render_field form.address2 class="form-control" %}
+        </div>
+
+        <div class="col-md-4">
+            <label for="">City:</label>
+            {% render_field form.person class="form-control" %}
+        </div>
+        <div class="col-md-4">
+            <label for="">NTN #:</label>
+            {% render_field form.NTN class="form-control" %}
+        </div>
+        <div class="col-md-4">
+            <label for="">GST #:</label>
+            {% render_field form.GST class="form-control" %}
+        </div>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+
+</div>
+{% endblock content %}

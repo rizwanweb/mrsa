@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<center>
+    <h1>List Of Consignments</h1>
+</center>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>a</th>
+            <th>L/C#</th>
+            <th>L/C Date</th>
+            <th>Client</th>
+            <th>Description</th>
+            <th>Vessel</th>
+            <th>Quantity</th>
+            <th>IGM</th>
+            <th>Total B/L</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for lc in lcs %}
+        <tr>
+            <td><a class="btn btn-sm btn-info" href="{% url 'update_lc' lc.id %}">Edit</a></td>
+            <td>{{lc.lcNo}}</td>
+            <td>{{lc.lcDate}}</td>
+            <td>{{lc.client}}</td>
+            <td>{{lc.item}}</td>
+            <td>{{lc.vessel}}</td>
+            <td>{{lc.totalQuantity}}</td>
+            <td>{{lc.igm}}{{lc.igmDate|date:'/y'}}</td>
+            <td class="text-center">{{lc.totalBL}}</td>
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Actions
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{% url 'ib_calculation' lc.id %}">Print Calculation Sheet</a></li>
+                        <li><a class="dropdown-item" href="{% url 'noc_sheet' lc.id %}">NOC Sheet</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
+            </td>
+            <td><a class="btn btn-sm btn-info" href="">Email</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

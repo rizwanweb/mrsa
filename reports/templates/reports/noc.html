@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOC Sheet</title>
+</head>
+
+<body>
+    <center>
+        <h1>N.O.C</h1>
+    </center>
+
+    <table>
+        <tr></tr>
+        <tr>
+            <td style="width: 20%;">Reference:</td>
+            <td><b>{{lc.totalQuantity}} M.Tons, {{lc.item}}, M.T. {{lc.vessel}}</b></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><b>IGM No. {{lc.igm}}/2021, Dated: {{lc.igmDate}}, Index No. {% for bl in bls %}{{bl.index}},
+                    {% endfor %}</b></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><b>L/C No. {{lc.lcNo}}, B/L# {% for bl in bls %}{{bl.blNo}},{% endfor %}</b></td>
+        </tr>
+    </table>
+
+    <center>
+        <h5>CALCULATION</h5>
+    </center>
+
+    {% for bl in bls %}
+    {% ifchanged  %}
+    <hr>
+    <table>
+
+        <tr>
+            <td>Quantity: <b>{{bl.quantity|floatformat:3}} M.Tons X </b></td>
+            <td>Declared Value: <b>$ {{bl.lc.dv|floatformat:2}}</b></td>
+            <td>Assessed Value: <b>$ {{bl.lc.av|floatformat:2}}</b></td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Insurance: <b>PKR. {{bl.insurance|floatformat:0}}</b> USD {{ins|floatformat:0}}</td>
+            <td>Exchange Rate: <b>{{bl.lc.exRate|floatformat:2}}</b></td>
+            <td>Import Value: <b>PKR. {{bl.importValuePKR|floatformat:0}}</b></td>
+        </tr>
+    </table>
+    {% endifchanged %}
+    {% endfor %}
+    <hr>
+    <br>
+    <table style="">
+        <tr>
+            <td style="width:25%">CUSTOM DUTY</td>
+            <td style="width:15%; text-align: right;"><b>{{dutyItem.cdRate}} PMT</b></td>
+            <td style="width:50%; text-align: right">{{cd}}</td>
+        </tr>
+        <tr>
+            <td style="width:25%">REGULATORY DUTY</td>
+            <td style="width:15%; text-align: right;"><b>{{dutyItem.rdRate}} PMT</b></td>
+            <td style="width:50%; text-align: right;">{{rd}}</td>
+        </tr>
+        <tr>
+            <td style="width:25%">ADDITIONAL CUSTOM DUTY</td>
+            <td style="width:15%; text-align: right;"><b>{{dutyItem.acdRate}} %</b></td>
+            <td style="width:50%; text-align: right">{{acd|floatformat:0}}</td>
+        </tr>
+        <tr>
+            <td style="width:25%">SALES TAX/C.E.D.</td>
+            <td style="width:15%; text-align: right;"><b>{{dutyItem.stRate}} %</b></td>
+            <td style="width:50%; text-align: right;">{{st}}</td>
+        </tr>
+        <tr>
+            <td style="width:25%">INCOME TAX</td>
+            <td style="width:15%; text-align: right;"><b>{{dutyItem.itRate}} %</b></td>
+            <td style="width:50%; text-align: right">{{it}}</td>
+        </tr>
+        {% if dutyItem.fed > 0 %}
+        <tr>
+            <td style="width:25%">F.E.D.</td>
+            <td style="width:15%; text-align: right;"><b> {{dutyItem.fed}}PMT</b></td>
+            <td style="width:50%; text-align: right"></td>
+        </tr>
+        {% else %}
+        <tr>
+            <td style="width:25%">F.E.D.</td>
+            <td style="width:15%; text-align: right;"><b> PMT</b></td>
+            <td style="width:50%; text-align: right"></td>
+        </tr>
+        {% endif %}
+        <tr></tr>
+        <tr>
+            <td style="width:25%">GRAND TOTAL</td>
+            <td style="width:15%; text-align: right;"><b> </b></td>
+            <td style="width:50%; text-align: right;"><b>{{total|floatformat:0}}</b></td>
+        </tr>
+
+    </table>
+    <br>
+    <table>
+        <tr>
+            <td style="width:80%">COLLECTOR OF CUSTOMS {{lc.port.name}} A/C (IMPORTER NAME & {{lc.client.NTN}})</td>
+            
+            <td style="width:10%; text-align: right;"><b>{{total|floatformat:0}}</b></td>
+        </tr>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<center><h1>PSQC Test</h1></center>
+
+{{lc}}
+<br>
+{% for bl in totalBL %}
+
+{{bl.lc.client}}:{{bl.importValuePKR}}---{{bl.lc.item}}
+<br>
+
+{% endfor %}
+
+{% if lc.psqc %}
+Total Amount: {{sumBL}}
+<br>
+<b>PSQC</b>:{{psqc}}
+{% endif %}
+{% endblock content %}
+
+
+
+
