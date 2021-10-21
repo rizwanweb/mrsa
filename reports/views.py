@@ -23,7 +23,7 @@ class IBCalculationPDF(View):
         for bl in totalBL:
             sumBL += bl.importValuePKR
         sumBL = round(sumBL)
-        psqc = round((sumBL * 0.005)+11000)
+        psqc = round((sumBL * (0.05/100))+11000)
 
         context = {
             'psqc': psqc,

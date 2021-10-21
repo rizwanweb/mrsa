@@ -31,7 +31,8 @@ class LC(models.Model):
     av = models.FloatField()
     exRate = models.FloatField()
     insurance = models.FloatField()
-    pqaRate = models.FloatField()
+    pqaRate = models.FloatField(default=31)
+    fed = models.FloatField(default=13)
     pqaCharges = models.FloatField(null=True, blank=True)
 
     billed = models.BooleanField(default=False)
@@ -40,7 +41,7 @@ class LC(models.Model):
     def save(self, *args, **kwargs):
         quantity = math.ceil(self.totalQuantity)
         pcharges = quantity * self.pqaRate
-        pcharges += pcharges * 0.13
+        pcharges += pcharges * self.fed
         self.pqaCharges = round(pcharges)
         super().save(*args, **kwargs)
 
