@@ -1,5 +1,6 @@
 from django.db import models
 import math
+from base.models import Terminal
 from lc.models import LC
 
 # Create your models here.
@@ -19,6 +20,10 @@ class BL(models.Model):
     exciseRate = models.FloatField(default=1.25)
     excise = models.FloatField(blank=True)
     stampCharges = models.FloatField(blank=True)
+
+    terminal = models.ForeignKey(Terminal, on_delete=models.CASCADE, null=True, blank=True)
+    isTerminal = models.BooleanField(default=False)
+    
 
     def save(self, *args, **kwargs):
         self.insurance = round((self.lc.insurance / self.lc.totalQuantity) * self.quantity)

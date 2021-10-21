@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/riz/mrsa-bootstrap/env"
+VIRTUAL_ENV="/home/faith/Desktop/mrsa/env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

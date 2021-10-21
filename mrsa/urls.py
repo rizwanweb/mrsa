@@ -23,4 +23,5 @@ urlpatterns = [
     path('lc/', include('lc.urls')),
     path('bl/', include('bl.urls')),
     path('reports/', include('reports.urls')),
+    path('eto/', include('eto.urls')),
 ]

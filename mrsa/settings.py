@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'bl',
     'item',
     'reports',
+    'eto',
 ]
 
 MIDDLEWARE = [

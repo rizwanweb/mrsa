@@ -1,4 +1,4 @@
-#!/home/riz/mrsa-bootstrap/env/bin/python
+#!/home/faith/Desktop/mrsa/env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
