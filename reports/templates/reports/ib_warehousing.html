@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,15 +63,16 @@
     </table>
     
     <center><h5>CALCULATION</h5></center>
+        
     
 {% for bl in bls %}
 {% ifchanged  %}
-
+    {{ dups|get_item:item.name }}
     <hr>
     <table>
         
         <tr>
-            <td>Quantity: <b>{{bl.quantity|floatformat:3}} M.Tons X {{dups.250}} </b></td><td>Declared Value: <b>$ {{bl.lc.dv|floatformat:2}}</b></td><td>Assessed Value: <b>$ {{bl.lc.av|floatformat:2}}</b></td>
+            <td>Quantity: <b>{{bl.quantity|floatformat:3}} M.Tons X  </b></td><td>Declared Value: <b>$ {{bl.lc.dv|floatformat:2}}</b></td><td>Assessed Value: <b>$ {{bl.lc.av|floatformat:2}}</b></td>
         </tr>
         <tr></tr>
         <tr>

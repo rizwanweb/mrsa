@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .utils import render_to_pdf
 import math
 from collections import Counter
+from django.template.defaulttags import register
 
 from lc.models import LC
 from bl.models import BL
@@ -24,7 +25,10 @@ class IBCalculationPDF(View):
         dups = Counter(dups)
         dups = dict(dups)
         print(dups)
-                    
+
+        @register.filter
+        def get_value(dictionary, key):
+            return dictionary.get(key)                
 
         # Get PSQC
         totalBL = BL.objects.filter(
