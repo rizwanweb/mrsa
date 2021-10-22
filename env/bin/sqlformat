@@ -1,4 +1,4 @@
-#!/home/faith/Desktop/mrsa/env/bin/python
+#!/home/riz/Django/mrsa/env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

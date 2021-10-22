@@ -1,6 +1,7 @@
-
+{% load ex %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,40 +9,50 @@
     <title>Calculation Sheet</title>
 </head>
 <style type="text/css">
-        @page {
-            size: letter portrait;
-            margin: 1cm;
-        }
-        body {
-            font-size: 12px;
-            border: 0px solid black;
-        }
-        h1 {
-            font-size: 36px;
-            text-align: center;
-        }
-        cal-table {
-            border-top: 1px;
-            padding: 3px;
-        }
-    </style>
+    @page {
+        size: letter portrait;
+        margin: 1cm;
+    }
+
+    body {
+        font-size: 12px;
+        border: 0px solid black;
+    }
+
+    h1 {
+        font-size: 36px;
+        text-align: center;
+    }
+
+    cal-table {
+        border-top: 1px;
+        padding: 3px;
+    }
+</style>
+
 <body>
-        <center><h1>M.R.SHIPPING AGENCY PVT LTD</h1></center>
+    <center>
+        <h1>M.R.SHIPPING AGENCY PVT LTD</h1>
+    </center>
     <table>
         <tr>
             <td>{% now "M-d-Y" %}</td>
-            <td style="background-color: lightgray;"><p>Note: Do not prepare COC & Excise Pay Order / Demand Draft if amount is Half Million or More,
-                that will be paid by PSID / Online
-            </p></td>
+            <td style="background-color: lightgray;">
+                <p>Note: Do not prepare COC & Excise Pay Order / Demand Draft if amount is Half Million or More,
+                    that will be paid by PSID / Online
+                </p>
+            </td>
         </tr>
         <tr></tr>
         <tr>
             <td><b>M/s. {{lc.client}}</b></td>
         </tr>
-        <tr><td><u>{{lc.client.city}}.</u></td></tr>
+        <tr>
+            <td><u>{{lc.client.city}}.</u></td>
+        </tr>
     </table>
-<br>
-        
+    <br>
+
     <table>
         <tr>
             <td style="width: 20%;">Attention:</td>
@@ -54,84 +65,100 @@
         </tr>
         <tr>
             <td></td>
-            <td><b>IGM No. {{lc.igm}}/2021, Dated: {{lc.igmDate}}, Index No. {% for bl in bls %}{{bl.index}}, {% endfor %}</b></td>
+            <td><b>IGM No. {{lc.igm}}/2021, Dated: {{lc.igmDate}}, Index No. {% for bl in bls %}{{bl.index}},{% endfor %}</b></td>      
         </tr>
         <tr>
             <td></td>
             <td><b>L/C No. {{lc.lcNo}}, B/L# {% for bl in bls %}{{bl.blNo}},{% endfor %}</b></td>
         </tr>
     </table>
-    
-    <center><h5>CALCULATION</h5></center>
-        
-    
-{% for bl in bls %}
-{% ifchanged  %}
-    {{ dups|get_item:item.name }}
+
+    <center>
+        <h5>CALCULATION</h5>
+    </center>
+
+
+    {% for bl in bls %}
+    {% ifchanged  %}
+
     <hr>
     <table>
-        
+
         <tr>
-            <td>Quantity: <b>{{bl.quantity|floatformat:3}} M.Tons X  </b></td><td>Declared Value: <b>$ {{bl.lc.dv|floatformat:2}}</b></td><td>Assessed Value: <b>$ {{bl.lc.av|floatformat:2}}</b></td>
+        {% if bl.lc.totalBL > 1 %}
+            <td>Quantity: <b>{{bl.quantity|floatformat:3}} M.Tons X {{ dups|get_value:bl.quantity }} </b></td>
+        {% else %}
+            <td>Quantity: <b>{{bl.quantity|floatformat:3}} M.Tons</b></td>
+        {% endif %}
+            <td>Declared Value: <b>$ {{bl.lc.dv|floatformat:2}}</b></td>
+            <td>Assessed Value: <b>$ {{bl.lc.av|floatformat:2}}</b></td>
         </tr>
         <tr></tr>
         <tr>
-            <td>Insurance: <b>PKR. {{bl.insurance|floatformat:0}}</b></td><td>Exchange Rate: <b>{{bl.lc.exRate|floatformat:2}}</b></td><td>Import Value: <b>PKR. {{bl.importValuePKR|floatformat:0}}</b></td>
+            <td>Insurance: <b>PKR. {{bl.insurance|floatformat:0}}</b></td>
+            <td>Exchange Rate: <b>{{bl.lc.exRate|floatformat:2}}</b></td>
+            <td>Import Value: <b>PKR. {{bl.importValuePKR|floatformat:0}}</b></td>
         </tr>
     </table>
     <hr>
-    
+
     {% endifchanged %}
     {% endfor %}
-<br>
+    <br>
 
     <table style="font-size:10px; border:0px;">
 
-    {% for bl in bls %}
-    {% ifchanged bl.warehousingCharges %}
-    {% if forloop.counter == 1 %}
-    
+        {% for bl in bls %}
+        {% ifchanged bl.warehousingCharges %}
+        {% if forloop.counter == 1 %}
+
         <tr>
-            <td style="width:75%;"><p>COLLECTOR OF CUSTOM PORT QASIM A/C <b>(Importer Name & NTN {{lc.client.NTN}}) </b></p></td>
+            <td style="width:75%;">
+                <p>COLLECTOR OF CUSTOM PORT QASIM A/C <b>(Importer Name & NTN {{lc.client.NTN}}) </b></p>
+            </td>
             <td style="text-align:center; width:10%;">0.25 %</td>
-            <td style="text-align:center; border:0px; font-size:12px;"><b>{{bl.warehousingCharges|floatformat:0}} X{{dups.0}}</b></td>
+            <td style="text-align:center; border:0px; font-size:12px;"><b>{{bl.warehousingCharges|floatformat:0}} X
+                    {{ dups|get_value:bl.quantity }}</b></td>
         </tr>
 
-    {% else %}
-    
+        {% else %}
+
         <tr>
             <td style="width:75%;"></td>
             <td style="text-align:center; width:15%;"></td>
-            <td style="text-align:center; border:0px; font-size:12px;"><b>{{bl.warehousingCharges|floatformat:0}} X</b></td>
+            <td style="text-align:center; border:0px; font-size:12px;"><b>{{bl.warehousingCharges|floatformat:0}} X
+                    {{ dups|get_value:bl.quantity }}</b></td>
         </tr>
-        
-    {% endif %}
-    {% endifchanged %}
-    {% endfor %}
 
-    <tr></tr>
-    {% for bl in bls %}
-    {% ifchanged bl.excise|floatformat:0 %}
-    {% if forloop.counter == 1 %}
-    
+        {% endif %}
+        {% endifchanged %}
+        {% endfor %}
+
+        <tr></tr>
+        {% for bl in bls %}
+        {% ifchanged bl.excise|floatformat:0 %}
+        {% if forloop.counter == 1 %}
+
         <tr>
             <td>EXCISE & TAXATION OFFICER PORT QASIM A/C <b>(Importer Name & NTN {{lc.client.NTN}}) </b></td>
             <td style="text-align:center; width:15%;">1.25 %</td>
-            <td style="text-align:center; border:0px; font-size:12px;">{{bl.excise|floatformat:0}} X</td>
+            <td style="text-align:center; border:0px; font-size:12px;">{{bl.excise|floatformat:0}} X
+                {{ dups|get_value:bl.quantity }}</td>
         </tr>
 
-    {% else %}
+        {% else %}
         <tr>
             <td></td>
             <td style="text-align:center; width:15%;"></td>
-            <td style="text-align:center; border:0px; font-size:12px;">{{bl.excise|floatformat:0}} X</td>
+            <td style="text-align:center; border:0px; font-size:12px;">{{bl.excise|floatformat:0}} X
+                {{ dups|get_value:bl.quantity }}</td>
         </tr>
-    
-    {% endif %}
-    {% endifchanged %}
-    {% endfor %}
+
+        {% endif %}
+        {% endifchanged %}
+        {% endfor %}
         <tr></tr>
-        
+
         <tr>
             <td>ASSISTANT SUPERITENDENT OF STAMPS PORT QASIM A/C <b>({{lc.client}})</b></td>
             <td style="text-align:center; width:15%;"></td>
@@ -158,9 +185,11 @@
         </tr>
         <tr></tr>
         <tr>
-            <td>Note:  <span style="background-color: lightgray;">IT IS INFORMED THAT WITHOUT REQUIRED DOCUMENTS IB GD COULD NOT BE FILED.</span></td>
+            <td>Note: <span style="background-color: lightgray;">IT IS INFORMED THAT WITHOUT REQUIRED DOCUMENTS IB GD
+                    COULD NOT BE FILED.</span></td>
         </tr>
 
     </table>
 </body>
+
 </html>
