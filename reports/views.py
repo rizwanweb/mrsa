@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .utils import render_to_pdf
 import math
+from collections import Counter
 
 from lc.models import LC
 from bl.models import BL
@@ -16,6 +17,15 @@ class IBCalculationPDF(View):
         lc = LC.objects.get(id=pk)
         bls = lc.bl_set.all()
 
+        #get Duplicates
+        dups = []
+        for bl in bls:
+            dups.append(bl.quantity)
+        dups = Counter(dups)
+        dups = dict(dups)
+        print(dups)
+                    
+
         # Get PSQC
         totalBL = BL.objects.filter(
             lc__item=lc.item, lc__igm=lc.igm, lc__client=lc.client)
@@ -26,6 +36,7 @@ class IBCalculationPDF(View):
         psqc = round((sumBL * (0.05/100))+11000)
 
         context = {
+            'dups': dups,
             'psqc': psqc,
             'lc': lc,
             'bls': bls,

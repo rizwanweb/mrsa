@@ -65,11 +65,12 @@
     
 {% for bl in bls %}
 {% ifchanged  %}
+
     <hr>
     <table>
         
         <tr>
-            <td>Quantity: <b>{{bl.quantity|floatformat:3}} M.Tons X </b></td><td>Declared Value: <b>$ {{bl.lc.dv|floatformat:2}}</b></td><td>Assessed Value: <b>$ {{bl.lc.av|floatformat:2}}</b></td>
+            <td>Quantity: <b>{{bl.quantity|floatformat:3}} M.Tons X {{dups.250}} </b></td><td>Declared Value: <b>$ {{bl.lc.dv|floatformat:2}}</b></td><td>Assessed Value: <b>$ {{bl.lc.av|floatformat:2}}</b></td>
         </tr>
         <tr></tr>
         <tr>
@@ -77,6 +78,7 @@
         </tr>
     </table>
     <hr>
+    
     {% endifchanged %}
     {% endfor %}
 <br>
@@ -90,7 +92,7 @@
         <tr>
             <td style="width:75%;"><p>COLLECTOR OF CUSTOM PORT QASIM A/C <b>(Importer Name & NTN {{lc.client.NTN}}) </b></p></td>
             <td style="text-align:center; width:10%;">0.25 %</td>
-            <td style="text-align:center; border:0px; font-size:12px;"><b>{{bl.warehousingCharges|floatformat:0}} X</b></td>
+            <td style="text-align:center; border:0px; font-size:12px;"><b>{{bl.warehousingCharges|floatformat:0}} X{{dups.0}}</b></td>
         </tr>
 
     {% else %}
