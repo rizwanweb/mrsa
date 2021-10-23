@@ -12,6 +12,7 @@
     @page {
         size: letter portrait;
         margin: 1cm;
+        background-color: brown;
     }
 
     body {
@@ -28,11 +29,17 @@
         border-top: 1px;
         padding: 3px;
     }
+
+    .td-bg-color {
+        background-color: #0ed5ce;
+        border: 1px solid black;
+    }
+
 </style>
 
 <body>
     <center>
-        <h1>M.R.SHIPPING AGENCY PVT LTD</h1>
+        <h1 style="background-color: #0ed5ce; border: 1px solid black; color: white;">M.R.SHIPPING AGENCY PVT LTD</h1>
     </center>
     <table>
         <tr>
@@ -61,15 +68,15 @@
         <tr></tr>
         <tr>
             <td style="width: 20%;">Reference:</td>
-            <td><b>{{lc.totalQuantity}} M.Tons, {{lc.item}}, M.T. {{lc.vessel}}</b></td>
+            <td class="td-bg-color" style="width: 60%; border-bottom: 0px;"><b>{{lc.totalQuantity}} M.Tons, {{lc.item}}, M.T. {{lc.vessel}}</b></td>
         </tr>
         <tr>
             <td></td>
-            <td><b>IGM No. {{lc.igm}}/2021, Dated: {{lc.igmDate}}, Index No. {% for bl in bls %}{{bl.index}},{% endfor %}</b></td>      
+            <td class="td-bg-color"><b>IGM No. {{lc.igm}}/2021, Dated: {{lc.igmDate}}, Index No. {% for bl in bls %}{{bl.index}},{% endfor %}</b></td>      
         </tr>
         <tr>
             <td></td>
-            <td><b>L/C No. {{lc.lcNo}}, B/L# {% for bl in bls %}{{bl.blNo}},{% endfor %}</b></td>
+            <td class="td-bg-color"><b>L/C No. {{lc.lcNo}}, B/L# {% for bl in bls %}{{bl.blNo}},{% endfor %}</b></td>
         </tr>
     </table>
 
@@ -126,7 +133,7 @@
         <tr>
             <td style="width:75%;"></td>
             <td style="text-align:center; width:15%;"></td>
-            <td style="text-align:center; border:0px; font-size:12px;"><b>{{bl.warehousingCharges|floatformat:0}} X
+            <td style="text-align:center; border:1px solid black; font-size:12px;"><b>{{bl.warehousingCharges|floatformat:0}} X
                     {{ dups|get_value:bl.quantity }}</b></td>
         </tr>
 

@@ -15,11 +15,6 @@ class AddClientView(CreateView):
     context_object_name = 'client'
     success_url = reverse_lazy('client_list')
 
-    def form_valid(self, form):
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        return super().form_invalid(form)
 
 
 class UpdateClientView(UpdateView):  # Update Client View
