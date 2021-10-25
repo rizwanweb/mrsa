@@ -18,7 +18,6 @@
 
     body {
         font-size: 12px;
-        border: 0px solid black;
     }
 
     h1 {
@@ -27,13 +26,13 @@
     }
 
     .container {
-        border-top: 1px solid black;
+        border-top:    2px solid  #ff0;
+        border-right:  2px dashed #f0F;
+        border-bottom: 2px dotted #f00;
+        border-left:   2px solid  #09f;
     }
 
-    table,
-    p, {
-        border: 0px solid black;
-    }
+
 </style>
 
 <body>
@@ -44,6 +43,7 @@
     <center>CLEARING FORWARDING & SHIPPING AGENT</center>
     <center>C.H.A.L. NO. 1509</center>
     <div class="container">
+    <div class="">
 
         <p>THE DIRECTOR CARGO (OPS)</p>
         <p>PORT QASIM AUTHORITY,</p>
@@ -51,7 +51,7 @@
 
 
         <p>SUBJECT: DISPATCH ALLOW FOR THE CONSIGNMENT OF</p>
-        <table>
+        <table style="border:0px">
             <tr>
                 <td>QUANTITY</td>
                 <td><b>{{lc.totalQuantity}}X{{lc.totalBL}}</b></td>
@@ -80,6 +80,7 @@
                 <td><b></b></td>
             </tr>
         </table>
+    </div>
     </div>
 </body>
 
