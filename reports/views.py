@@ -86,3 +86,18 @@ class NocPDF(View):
         }
         pdf = render_to_pdf('reports/noc.html', context)
         return pdf
+
+
+class AllowPDF(View):
+    #login_url = 'login'
+    def get(self, request, pk, *args, **kwargs):
+        lc = LC.objects.get(id=pk)
+        bls = lc.bl_set.all()
+        
+
+        context = {
+            'lc': lc,
+            'bls': bls,
+        }
+        pdf = render_to_pdf('reports/allow.html', context)
+        return pdf

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<center><h1>Assign Terminal</h1></center>
+<br>
+<br>
+<br>
+<div class="h-100 d-flex justify-content-center align-items-center">
+<form action="" method="post">
+    {% csrf_token %}
+    <label class="form-form-label" for="">Terminal</label>
+    {% render_field form.terminal class="form-control" %}
+    <br>
+    <a class="btn btn-secondary btn-lg" href="{% url 'bl_list' %}">Cancel</a>
+    <button class="btn btn-primary btn-lg" type="submit">Save Changes</button>
+</form>
+</div>
+
+
+{% endblock content %}

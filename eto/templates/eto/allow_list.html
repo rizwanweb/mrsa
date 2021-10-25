@@ -45,7 +45,7 @@
     </thead>
     <tbody>
         {% for bl in bls %}
-        {% if bl.terminal is None %}
+        {% if bl.terminal %}
         <tr>
             <td>{{bl.blNo}}</td>
             <td>{{bl.blDate}}</td>
@@ -62,8 +62,8 @@
                         Actions
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="">Print Calculation Sheet</a></li>
-                        <li><a class="dropdown-item" href="">NOC Sheet</a></li>
+                        <li><a class="dropdown-item" href="{% url 'allow' bl.lc.id %}">Print Allow</a></li>
+                        <li><a class="dropdown-item" href="">Wharfage</a></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </div>

@@ -1,0 +1,86 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allow</title>
+</head>
+<style type="text/css">
+    @page {
+        size: letter portrait;
+        margin: 3cm;
+        background-color: brown;
+    }
+
+    body {
+        font-size: 12px;
+        border: 0px solid black;
+    }
+
+    h1 {
+        font-size: 36px;
+        text-align: center;
+    }
+
+    .container {
+        border-top: 1px solid black;
+    }
+
+    table,
+    p, {
+        border: 0px solid black;
+    }
+</style>
+
+<body>
+
+    <center><u>
+            <h1>M.R. SHIPPING AGENCY PVT LTD</h1>
+        </u></center>
+    <center>CLEARING FORWARDING & SHIPPING AGENT</center>
+    <center>C.H.A.L. NO. 1509</center>
+    <div class="container">
+
+        <p>THE DIRECTOR CARGO (OPS)</p>
+        <p>PORT QASIM AUTHORITY,</p>
+        <p><u>PORT QASIM</u></p>
+
+
+        <p>SUBJECT: DISPATCH ALLOW FOR THE CONSIGNMENT OF</p>
+        <table>
+            <tr>
+                <td>QUANTITY</td>
+                <td><b>{{lc.totalQuantity}}X{{lc.totalBL}}</b></td>
+                <td>DESC</td>
+                <td><b>{{lc.item}}</b></td>
+            </tr>
+
+            <tr>
+                <td>VESSEL</td>
+                <td><b>{{lc.vessel}}</b></td>
+                <td>IGM NO.</td>
+                <td><b>{{lc.igm}}</b></td>
+            </tr>
+
+            <tr>
+                <td>DATED</td>
+                <td><b>{{lc.igmDate}}</b></td>
+                <td>INDEX NO</td>
+                <td><u><b>{% for bl in bls %}{{bl.index}},{% endfor %}</b></u></td>
+            </tr>
+
+            <tr>
+                <td>TERMINAL NAME</td>
+                <td><b></b></td>
+                <td>B/L NO.</td>
+                <td><b></b></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
