@@ -4,37 +4,15 @@
 
 {% block content %}
 
-<!-- Add Terminal Modal -->
-<div class="modal fade" id="addTerminalModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Terminal</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <center><h2>Assign Terminal</h2></center>
-        <form action="" method="post">
-            {% csrf_token %}
-            {{bl}}
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-<center><h1>Assign Terminals</h1></center>
+<center><h1>Create Allow</h1></center>
 
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>B/L #</th>
-            <th>B/L Date</th>
+            <th>L/C #</th>
+            <th>L/C Date</th>
             <th>Client</th>
             <th>Description</th>
             <th>Vessel</th>
@@ -44,16 +22,16 @@
         </tr>
     </thead>
     <tbody>
-        {% for bl in bls %}
-        {% if bl.terminal %}
+        {% for lc in lcs %}
+        
         <tr>
-            <td>{{bl.blNo}}</td>
-            <td>{{bl.blDate}}</td>
-            <td>{{bl.lc.client}}</td>
-            <td>{{bl.lc.item}}</td>
-            <td>{{bl.lc.vessel}}</td>
-            <td>{{bl.quantity}}</td>
-            <td>{{bl.lc.igm}}{{bl.lc.igmDate|date:'/y'}}</td>
+            <td>{{lc.lcNo}}</td>
+            <td>{{lc.lcDate}}</td>
+            <td>{{lc.client}}</td>
+            <td>{{lc.item}}</td>
+            <td>{{lc.vessel}}</td>
+            <td>{{lc.totalQuantity}} M.Tons</td>
+            <td>{{lc.igm}}{{lc.igmDate|date:'/y'}}</td>
             <td class="text-center"></td>
             <td>
                 <div class="dropdown">
@@ -62,13 +40,13 @@
                         Actions
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="{% url 'allow' bl.lc.id %}">Print Allow</a></li>
+                        <li><a class="dropdown-item" href="{% url 'allow' lc.id %}">Print Allow</a></li>
                         <li><a class="dropdown-item" href="">Wharfage</a></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </div>
             </td>
-            <td><a class="btn btn-sm btn-info" href="{% url 'add_terminal' bl.id %}">Add Terminal</a></td>
+            {% comment %} <td><a class="btn btn-sm btn-info" href="{% url 'add_terminal' %}">Edit Terminal</a></td> {% endcomment %}
             <!-- Button trigger modal -->
             {% comment %} <td>
             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addTerminalModal">
@@ -76,7 +54,7 @@
             </button>
             </td> {% endcomment %}
         </tr>
-        {% endif %}
+        
         {% endfor %}
     </tbody>
 </table>

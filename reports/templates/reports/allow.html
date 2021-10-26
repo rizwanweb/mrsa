@@ -13,11 +13,11 @@
     @page {
         size: letter portrait;
         margin: 3cm;
-        background-color: brown;
+        
     }
 
     body {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     h1 {
@@ -26,10 +26,7 @@
     }
 
     .container {
-        border-top:    2px solid  #ff0;
-        border-right:  2px dashed #f0F;
-        border-bottom: 2px dotted #f00;
-        border-left:   2px solid  #09f;
+
     }
 
 
@@ -37,26 +34,28 @@
 
 <body>
 
-    <center><u>
-            <h1>M.R. SHIPPING AGENCY PVT LTD</h1>
-        </u></center>
-    <center>CLEARING FORWARDING & SHIPPING AGENT</center>
-    <center>C.H.A.L. NO. 1509</center>
-    <div class="container">
-    <div class="">
+<div class="container">
+    <center><u><h1 style="margin-bottom: 0px;">M.R. SHIPPING AGENCY PVT LTD</h1></u></center>
+    <center><h2 style="margin: 0px;">CLEARING FORWARDING & SHIPPING AGENT</h2></center>
+    <center><h2 style="margin-top: 0px;">C.H.A.L. NO. 1509</h2></center>
+</div>    
 
-        <p>THE DIRECTOR CARGO (OPS)</p>
-        <p>PORT QASIM AUTHORITY,</p>
-        <p><u>PORT QASIM</u></p>
-
+<br>
+<br>
+<div>
+        <p style="margin: 0px;">THE DIRECTOR CARGO (OPS)</p>
+        <p style="margin: 0px;">PORT QASIM AUTHORITY,</p>
+        <p style="margin: 0px;"><u>PORT QASIM</u></p>
+</div>
+<br>
 
         <p>SUBJECT: DISPATCH ALLOW FOR THE CONSIGNMENT OF</p>
-        <table style="border:0px">
+        <table style="border:0px solid black;">
             <tr>
-                <td>QUANTITY</td>
-                <td><b>{{lc.totalQuantity}}X{{lc.totalBL}}</b></td>
-                <td>DESC</td>
-                <td><b>{{lc.item}}</b></td>
+                <td style="width: 30%;">QUANTITY</td>
+                <td style="width: 25%;"><b>{{lc.totalQuantity}}X{{lc.totalBL}}</b></td>
+                <td style="width: 20%;">DESC</td>
+                <td style="width: 40%;"><b>{{lc.item}}</b></td>
             </tr>
 
             <tr>
@@ -75,11 +74,20 @@
 
             <tr>
                 <td>TERMINAL NAME</td>
-                <td><b></b></td>
+                <td><b>{% if lc.totalBL > 1 %}{% for bl in bls %}{{bl.terminal.licenseNumber}}--{{bl.terminal}},<br>{% endfor %} {% else %}{% for bl in bls %}{{bl.terminal.licenseNumber}}--{{bl.terminal}}{% endfor %}{% endif %}</b></td>
                 <td>B/L NO.</td>
-                <td><b></b></td>
+                <td><b>{% if lc.totalBL > 1 %}{% for bl in bls %}{{bl.blNo}}<br>{% endfor %} {% else %}{% for bl in bls %}{{bl.blNo}}{% endfor %}{% endif %}</b></td>
             </tr>
         </table>
+        <br>
+        <p>A/C: <b><u>{{lc.client}}</u></b></p>
+        <p style="font-size: 16px; margin-bottom: 0px;">Dear Sir,</p>
+        <p style="font-size: 16px;">
+        Kindly allow us to dispatch of the Cargo in the completion of Custom and Port Qasim Authority formilities.
+        </p>
+        <p>Thanking You,</p>
+        <p>Yours Faithfully,</p>
+        <p>For: <b>M.R. SHIPPING AGENCY (PVT) LTD</b></p>
     </div>
     </div>
 </body>

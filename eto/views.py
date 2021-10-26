@@ -18,9 +18,11 @@ class AddTerminalView(ListView):
     
     
 class BLListView(ListView):
-    model = BL
+    model = LC
     template_name = 'eto/allow_list.html'
-    context_object_name = 'bls'
+    context_object_name = 'lcs'
+
+    
 
 class UpdateTerminalView(UpdateView):
     model = BL

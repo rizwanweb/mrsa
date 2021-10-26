@@ -93,7 +93,9 @@ class AllowPDF(View):
     def get(self, request, pk, *args, **kwargs):
         lc = LC.objects.get(id=pk)
         bls = lc.bl_set.all()
-        
+
+        blno = []
+
 
         context = {
             'lc': lc,
