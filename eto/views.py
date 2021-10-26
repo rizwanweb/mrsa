@@ -23,12 +23,15 @@ class BLListView(ListView):
     context_object_name = 'lcs'
 
     
-
 class UpdateTerminalView(UpdateView):
     model = BL
     template_name = 'eto/add_terminal.html'
     form_class = AddTerminalForm
     success_url = reverse_lazy('bl_list')
-    
+
+class BondListView(ListView):
+    model = BL
+    template_name = 'eto/ibond.html'
+    context_object_name = 'bls'
     
 

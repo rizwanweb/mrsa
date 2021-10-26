@@ -103,3 +103,14 @@ class AllowPDF(View):
         }
         pdf = render_to_pdf('reports/allow.html', context)
         return pdf
+
+
+class BondPDF(View):
+    #login_url = 'login'
+    def get(self, request, pk, *args, **kwargs):
+        bl = BL.objects.get(id=pk)
+        context = {
+            'bl': bl,
+        }
+        pdf = render_to_pdf('reports/bond.html', context)
+        return pdf

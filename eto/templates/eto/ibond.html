@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<center><h1>Create Indemnity Bond</h1></center>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>L/C #</th>
+            <th>L/C Date</th>
+            <th>Client</th>
+            <th>Description</th>
+            <th>Vessel</th>
+            <th>Quantity</th>
+            <th>IGM</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for bl in bls %}
+        <tr>
+            <td>{{bl.lc.lcNo}}</td>
+            <td>{{bl.lc.lcDate}}</td>
+            <td>{{bl.lc.client}}</td>
+            <td>{{bl.lc.item}}</td>
+            <td>{{bl.lc.vessel}}</td>
+            <td>{{bl.quantity}} M.Tons</td>
+            <td>{{bl.lc.igm}}{{bl.lc.igmDate|date:'/y'}}</td>
+            <td class="text-center"></td>
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Actions
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{% url 'bond' bl.id %}">Something else here</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

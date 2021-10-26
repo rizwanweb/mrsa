@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDEMNITY BOND</title>
+    <style>
+        @page {
+            size: legal portrait;
+
+            @frame content_frame {
+                left: 50pt;
+                width: 512pt;
+                top: 12cm;
+                height: 692pt;
+                /*-pdf-frame-border: 1;     for debugging the layout */
+            }
+        }
+
+        body {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <center><h1>INDEMNITY BOND</h1></center>
+    <div>
+    <p style="margin: 0px;"><b>The Collector MCC,</b></p>
+    <p style="margin: 0px;"><u>Port Muhammad Bin Qasim.</u></p>
+    </div>
+    <br>
+    <table>
+        <tr>
+            <td style="width: 15%;"><b>Subject:</b></td>
+            <td>WAREHOUSING OF <b><u>{{bl.quantity}}</u></b> METRIC TONS OF <b><u>{{bl.lc.item}}</u></b> IN THE BONDED
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 15%;"></td>
+            <td>WAREHOUSE LICENSE NO.<b><u>{{bl.terminal.licenseNumber}}</u></b> IMPORTED PER M.T. <b><u>{{bl.lc.vessel}}</u></b> IGM NO. <b><u>PQIB-{{bl.lc.igm}}</u></b> DATED. <b><u>{{bl.lc.igmDate}}</u></b> INDEX NO. <b><u>{{bl.index}}</u></b> G.D.NO. PQIB-IB-_________ DATED ____________ BL NO. <b><u>{{bl.blNo}}</u></b> DATED. <b><u>{{bl.blDate}}</u></b>
+            </td>
+        </tr>
+    </table>
+<p>Dear Sir,</p>
+<p align="justify" style="font-size:12px;">
+The deed of Indemnity is made on ________ day of___________,2021 between M/s <b>{{bl.lc.client}}, {{bl.lc.client.address}}, {{bl.lc.client.city}}, PAKISTAN,</b>
+having N.I.C.No.{{bl.lc.client.NTN}} (hereinafter calledthe importers) that means to include their successors, administrators executors and assignees that constitutes one part of the deed and the 
+President of Pakistan through the Collector of Customs Port Qasim, Karachi(hereinafter called the Collector of Customs).</p>
+
+<p align="justify" style="font-size:12px;">
+Where as in accordance with the Government of Pakistan decision contained in Chapter-XI of the Custom Act, 1969, allowing warehousing of the subject imported goods in the public/private bonded warehouse,
+bearing license No.PWL-<b><u>{{bl.terminal.licenseNumber}}</u></b> M/s <b><u>{{bl.terminal.name}}, Terminal Address</u></b>. Without recovery of so much of the Custom duties, taxes and other charges and subject to conditions as specified
+below including that in case of default further warehousing facilities of the defaulting Importers should not be allowed.
+</p>
+<ul>
+<p align="justify" style="font-size:12px;"><li>1. 
+To observe all the provision of the Custom Act and the allied laws rules in respect of such goods.
+</li></p>
+
+<p align="justify" style="font-size:12px;"><li>2. 
+To pay on before a date specified in a notice of demand all duties, taxes, rent and charges payable in respect of such goods together with surcharge
+on the same from the date so specified at the rate of one percent per month or such other rate as is for the time being fixed by the Board.
+</li></p>
+
+<p style="font-size:12px; align: justify"><li>3. 
+To discharge all penalties incurred for violation of the Custom Act and the allied / rules in respect of such goods.
+</li></p>
+
+<p align="justify" style="font-size:12px;"><li>4. 
+if the said importer <b>M/s. {{bl.lc.client}},</b> or their legal representatives, shall pay to the appropriate officer of Customs
+and all dues whether customs-duties, warehouse-dues, goods, rent or on other lawful charges which shall be demandable in the said goods, or in account of penalties incurred in
+respect to them, within <b><u>3</u></b> months from the date of this Bond, or within such further time as the Collector of Customs or the Central Board of Revenue may allow in that behalf together with
+interest on every such sum at the rate of fourteen percent per annum or such other rate for the relevant period as may be fixed by the Central Board of Revenue from the date of demand thereof being made in writing by the said officer;
+</li></p>
+</ul>
+<br>
+<p align="right"> <b>CONT.....</b></p>
+</body>
+
+</html>
