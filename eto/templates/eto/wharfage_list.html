@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<center><h1>Enter Wharfage Payorder Details</h1></center>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>L/C #</th>
+            
+            <th>Client</th>
+            <th>Description</th>
+            <th>Vessel</th>
+            <th>Quantity</th>
+            <th>IGM</th>
+            <th>Wharfage Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for lc in lcs %}
+        {% if lc.pqaPayorder is None %}
+        <tr>
+            <td>{{lc.lcNo}}</td>
+            <td>{{lc.client}}</td>
+            <td>{{lc.item}}</td>
+            <td>{{lc.vessel}}</td>
+            <td>{{lc.totalQuantity}} M.Tons</td>
+            <td>{{lc.igm}}{{lc.igmDate|date:'/y'}}</td>
+            <td class="text-center">{{lc.pqaCharges|floatformat:0}}</td>
+            <td class="text-center"></td>
+            <td><a class="btn btn-sm btn-primary" href="{% url 'add_wharfage' lc.id %}">Enter Payorder</a></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

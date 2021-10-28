@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wharfage</title>
+
+    <style>
+        @page {
+            size: letter portrait;
+            margin: 0.5cm;
+        }
+
+        body {
+            font-size: 13px;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .hd h1,
+        h3,
+        p {
+            margin: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="border:1px solid black; font-size:13px;">
+        <tr>
+            <td style="width: 16%"><img
+                    src="https://jobshop247.com/wp-content/uploads/wp-job-board-pro-uploads/_employer_featured_image/2021/08/Port-Qasim-Authority-Logo.png"
+                    alt="pqimage"></td>
+            <td class="hd">
+                <center>
+                    <h1 style="font-size: 24px">PORT QASIM AUTHORITY</h1>
+                    <h3>BIN QASIM KARACHI</h3> <b>
+                        <p>NTN#:3393123-2</p>
+                    </b> <b>
+                        <p>STR#:1705999800191</p>
+                    </b>
+                </center>
+            </td>
+        </tr>
+    </table>
+    <br>
+
+    <center><b>
+            <p>PAYMENT RECEIPT CHALLAN/INVOICE</p>
+        </b></center>
+
+    <table>
+        <tr style="border-top: 1px solid black; border-left: 1px solid black; padding: 2px;">
+            <td>
+                
+            </td>
+            <td style="border: 1px solid black">
+                <center> <b>CLEARING AGENT</b></center>
+            </td>
+            <td style="border: 1px solid black">
+                <center> <b>REMITTER</b></center>
+            </td>
+        </tr>
+    </table>
+    <table style="font-size: 11px; border-right: 1px solid black;">
+        <tr style="border-left: 1px solid black; padding: 2px;">
+            <td style="width: 259px">
+                <p>INVOICE# CV/_____________/10/2021-22</p>
+            </td>
+            <td style="width: 260px;">Name: M.R.SHIPPING AGENCY</td>
+            <td style="width: 7%; border-bottom: 1px solid black;">Name:</td>
+            <td style="border-bottom: 1px solid black;"><b>{{lc.client}}</b></td>
+        </tr>
+
+        <tr style="border-left: 1px solid black; padding: 2px;">
+            <td style="width: 259px">
+                <p>CHALLAN#:_______________/2021-22</p>
+            </td>
+            <td style="width: 260px;">NTN#: 01-01-2605500-7</td>
+            <td style="width: 7%; border-bottom: 1px solid black;">NTN:</td>
+            <td style="border-bottom: 1px solid black;"><b>{{lc.client.NTN}}</b></td>
+        </tr>
+
+        <tr style="border-left: 1px solid black; padding: 2px;">
+            <td style="width: 259px"><p>DATE:_______________/2021-22</p></td>
+            <td style="width: 260px;">STR#: 11-00-9805-265-46</td>
+            <td style="width: 7%; border-bottom: 1px solid black;">STR:</td>
+            <td style="border-bottom: 1px solid black;"><b>{{lc.client.GST}}</b></td>
+        </tr>
+
+        <tr style="border-left: 1px solid black; border-bottom: 1px solid black; padding: 2px;">
+            <td style="width: 259px"></td>
+            <td style="width: 260px;">Other:</td>
+            <td style="width: 7%; border-bottom: 1px solid black;">Others:</td>
+            <td><b></b></td>
+        </tr>
+    </table>
+
+    <table>
+        <tr style="border-left: 1px solid black; padding: 3px">
+
+            <td> <b>BL NO:{% for bl in bls %} <u>{{bl.blNo}},</u>{% endfor %}</b>
+                <br><br>
+                <b> IGM NO: {{lc.igm}}/2021 </b>
+                <br><br>
+                <b>QTY: {{lc.totalQuantity|floatformat:0}} M/TONS</b>
+                <br><br>
+                <b>ARRIVAL DT: ___________-10-21</b>
+            </td>
+            <td style="width: 100px;"><b>
+                    Vessel: <br>
+                    Index No: <br>
+                    MOP: <br>
+                    P/O No: <br>
+                    Bank: <br>
+                    Bank Branch: <br>
+                    Bank Deposit: <br>
+                </b>
+            </td>
+            <td style="border-left: 0px; border-right: 1px solid black;">
+                <b>
+                    <u>{{lc.vessel}}</u> <br>
+                    {% for bl in bls %} <u> {{bl.index}}, </u> {% endfor %} <br>
+                    PAYORDER <br>
+                    {{lc.pqaPayorder}} <br>
+                    {{lc.bank}} <br>
+                    {{lc.branch}} <br>
+                    HBL, A/C. NO.95 (INCOME)
+                </b>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr style="border: 1px solid black;">
+            <td style="font-size: 18px; padding: 3px;">
+                <center> <b>Full Particular of the Remitance and authority (if any)</b></center>
+            </td>
+            <td style="font-size: 18px; padding: 3px;">
+                <center><b>Amount (Rs)</b></center>
+            </td>
+            <td style="font-size: 18px; padding: 3px; width: 20%"> <b>Head of Account</b></td>
+        </tr>
+    </table>
+    <br>
+    <p><b>Description:</b></p>
+
+    <p><b><u>WHARFAGE CHARGES ON IMPORT OF {{lc.item}}</u></b></p>
+<br>
+    <table style="border: 1px solid black; padding: 0px;">
+    <tr style="padding: 3px;">
+        <td>WHARFAGE (LCT/ FWQ)</td>
+        <td style="text-align: right;">{{wharfage}}</td>
+        <td style="text-align: right;">54-158</td>
+    </tr>
+                    <tr style="padding: 3px;">
+            <td>SINDH SALES TAX (S.S.T)</td>
+            <td style="text-align: right; width: 25%;">{{sst|floatformat:0}}</td>
+            <td style="text-align: right;">48-285</td>
+        </tr>
+        <tr>
+            <td style="padding: 3px;">OTHER</td>
+            <td style="text-align: right;"></td>
+            <td style="text-align: right; padding: 3px;">59-303</td>
+        </tr>
+        <tr style="padding: 3px;">
+        <td><b>TOTAL:</b>   </td>
+        <td style="text-align: right;"><b>{{lc.pqaCharges|floatformat:0}}</b></td>
+        <td style="border-bottom: 0px solid black;">  </td>
+    </tr>
+    </table>
+
+    <table style="border: 0px solid black; padding: 0px;">
+
+    </table>
+
+
+</body>
+
+</html>

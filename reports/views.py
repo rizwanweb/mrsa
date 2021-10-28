@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .utils import render_to_pdf
 import math
+from num2words import num2words
 from collections import Counter
 
 from lc.models import LC
@@ -93,10 +94,6 @@ class AllowPDF(View):
     def get(self, request, pk, *args, **kwargs):
         lc = LC.objects.get(id=pk)
         bls = lc.bl_set.all()
-
-        blno = []
-
-
         context = {
             'lc': lc,
             'bls': bls,
@@ -104,8 +101,27 @@ class AllowPDF(View):
         pdf = render_to_pdf('reports/allow.html', context)
         return pdf
 
+class WharfagePDF(View):
+    #login_url = 'login'
+    def get(self, request, pk, *args, **kwargs):
+        lc = LC.objects.get(id=pk)
+        bls = lc.bl_set.all()
 
-class BondPDF(View):
+        wharfage = math.ceil(lc.totalQuantity) * 31
+        sst = wharfage * (lc.fed/100)
+        print(wharfage)
+        print(sst)
+        context = {
+            'wharfage': wharfage,
+            'sst': sst,
+            'lc': lc,
+            'bls': bls,
+        }
+        pdf = render_to_pdf('reports/wharfage.html', context)
+        return pdf
+
+
+class BondPDF(View): # Indemnity Bond PDF
     #login_url = 'login'
     def get(self, request, pk, *args, **kwargs):
         bl = BL.objects.get(id=pk)
@@ -113,4 +129,14 @@ class BondPDF(View):
             'bl': bl,
         }
         pdf = render_to_pdf('reports/bond.html', context)
+        return pdf
+
+class Bond2PDF(View): #Second Page of Indemnity Bond PDF
+    #login_url = 'login'
+    def get(self, request, pk, *args, **kwargs):
+        bl = BL.objects.get(id=pk)
+        context = {
+            'bl': bl,
+        }
+        pdf = render_to_pdf('reports/bond2.html', context)
         return pdf

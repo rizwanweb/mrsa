@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<center><h1>Add Payorder Details</h1></center>
+
+<div class="h-100 d-flex justify-content-center align-items-center">
+<form action="" method="post">
+{% csrf_token %}
+
+    <label class="form-form-label" for="">Pay Order Number</label>
+    {% render_field form.pqaPayorder class="form-control" %}
+    
+    <label class="form-form-label" for="">Bank</label>
+    {% render_field form.bank class="form-control" %}
+    
+    <label class="form-form-label" for="">Branch</label>
+    {% render_field form.branch class="form-control" %}
+
+<br>
+<center>
+<a class="btn btn-info btn-lg" href="{% url 'wharfage_list' %}"> Back </a>
+<button class="btn btn-primary btn-lg" type="submit">Save</button>
+</center>
+
+</form>
+</div>
+
+
+{% endblock content %}

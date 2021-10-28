@@ -34,6 +34,9 @@ class LC(models.Model):
     pqaRate = models.FloatField(default=31)
     fed = models.FloatField(default=13)
     pqaCharges = models.FloatField(null=True, blank=True)
+    pqaPayorder = models.CharField(max_length=50, null=True, blank=True)
+    bank = models.CharField(max_length=50, null=True, blank=True)
+    branch = models.CharField(max_length=50, null=True, blank=True) 
 
     billed = models.BooleanField(default=False)
     psqc = models.BooleanField(default=False)
@@ -41,7 +44,7 @@ class LC(models.Model):
     def save(self, *args, **kwargs):
         quantity = math.ceil(self.totalQuantity)
         pcharges = quantity * self.pqaRate
-        pcharges += pcharges * self.fed
+        pcharges += pcharges * (self.fed / 100)
         self.pqaCharges = round(pcharges)
         super().save(*args, **kwargs)
 

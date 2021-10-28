@@ -7,7 +7,7 @@ from django.views.generic.edit import UpdateView
 
 from bl.models import BL
 from lc.models import LC
-from .forms import AddTerminalForm
+from .forms import AddTerminalForm, AddPQAForm
 
 
     
@@ -15,6 +15,17 @@ class AddTerminalView(ListView):
     model = BL
     template_name = 'eto/bl_list.html'
     context_object_name = 'bls'
+
+class AddPayorderView(ListView):
+    model = LC
+    template_name = 'eto/wharfage_list.html'
+    context_object_name = 'lcs'
+
+class UpdatePQAView(UpdateView):
+    model = LC
+    template_name = 'eto/add_wharfage.html'
+    form_class = AddPQAForm
+    success_url = reverse_lazy('wharfage_list')
     
     
 class BLListView(ListView):

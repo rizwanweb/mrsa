@@ -1,11 +1,15 @@
-from django.forms import ModelForm, fields
+from django.forms import ModelForm
 
 
 from bl.models import BL
-
+from lc.models import LC
 
 class AddTerminalForm(ModelForm):
     class Meta:
         model = BL
         fields = ['terminal']
-        #fields = '__all__'
+
+class AddPQAForm(ModelForm):
+    class Meta:
+        model = LC
+        fields = ['pqaPayorder', 'bank', 'branch']
