@@ -109,9 +109,18 @@ class WharfagePDF(View):
 
         wharfage = math.ceil(lc.totalQuantity) * 31
         sst = wharfage * (lc.fed/100)
-        print(wharfage)
-        print(sst)
+        inwords = num2words(lc.pqaCharges)
+        print(inwords)
+
+        blno = []
+        for bl in bls:
+            blno.append(bl.blNo[-3:])
+        blno.pop(0)
+        for n in blno:
+            print(n)
         context = {
+            'blno': blno,
+            'inwords': inwords,
             'wharfage': wharfage,
             'sst': sst,
             'lc': lc,

@@ -41,6 +41,9 @@ class LC(models.Model):
     billed = models.BooleanField(default=False)
     psqc = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ['igm']
+
     def save(self, *args, **kwargs):
         quantity = math.ceil(self.totalQuantity)
         pcharges = quantity * self.pqaRate

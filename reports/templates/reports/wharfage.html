@@ -32,7 +32,7 @@
 </head>
 
 <body>
-    <table style="border:1px solid black; font-size:13px;">
+    <table style="border:0px solid black; font-size:13px;">
         <tr>
             <td style="width: 16%"><img
                     src="https://jobshop247.com/wp-content/uploads/wp-job-board-pro-uploads/_employer_featured_image/2021/08/Port-Qasim-Authority-Logo.png"
@@ -58,7 +58,7 @@
     <table>
         <tr style="border-top: 1px solid black; border-left: 1px solid black; padding: 2px;">
             <td>
-                
+
             </td>
             <td style="border: 1px solid black">
                 <center> <b>CLEARING AGENT</b></center>
@@ -88,7 +88,9 @@
         </tr>
 
         <tr style="border-left: 1px solid black; padding: 2px;">
-            <td style="width: 259px"><p>DATE:_______________/2021-22</p></td>
+            <td style="width: 259px">
+                <p>DATE:_______________/2021-22</p>
+            </td>
             <td style="width: 260px;">STR#: 11-00-9805-265-46</td>
             <td style="width: 7%; border-bottom: 1px solid black;">STR:</td>
             <td style="border-bottom: 1px solid black;"><b>{{lc.client.GST}}</b></td>
@@ -103,15 +105,34 @@
     </table>
 
     <table>
-        <tr style="border-left: 1px solid black; padding: 3px">
+        <tr style="border-left: 1px solid black; padding: 3px;">
 
-            <td> <b>BL NO:{% for bl in bls %} <u>{{bl.blNo}},</u>{% endfor %}</b>
+            <td style="border-left: 1px solid black; padding: 3px; width: 110px;"> <b>BL NO:</b>
                 <br><br>
-                <b> IGM NO: {{lc.igm}}/2021 </b>
+                <b> IGM NO:</b>
                 <br><br>
-                <b>QTY: {{lc.totalQuantity|floatformat:0}} M/TONS</b>
+                <b>QTY:</b>
                 <br><br>
-                <b>ARRIVAL DT: ___________-10-21</b>
+                <b>ARRIVAL DT:</b>
+            </td>
+            <td style="border-left: 0px solid black; padding: 3px">
+                {% for bl in bls %}
+                    {% if lc.totalBL > 1 %}
+                        {% if forloop.counter == 1 %}<b><u>{{bl.blNo}},</u></b>
+                        {% elif forloop.counter > 1 %}
+                            {% for b in blno %}<b><u>{{b}},</u></b>{% endfor %}
+                        {% endif %}
+                    {% else %}
+                    <b><u>{{bl.blNo}}</u></b>
+                {% endif %} 
+                    
+                {% endfor %}</b>
+                <br><br>
+                <b>{{lc.igm}}/2021 </b>
+                <br><br>
+                <b>{{lc.totalQuantity|floatformat:0}} M/TONS</b>
+                <br><br>
+                <b>_________________</b>
             </td>
             <td style="width: 100px;"><b>
                     Vessel: <br>
@@ -151,14 +172,14 @@
     <p><b>Description:</b></p>
 
     <p><b><u>WHARFAGE CHARGES ON IMPORT OF {{lc.item}}</u></b></p>
-<br>
+    <br>
     <table style="border: 1px solid black; padding: 0px;">
-    <tr style="padding: 3px;">
-        <td>WHARFAGE (LCT/ FWQ)</td>
-        <td style="text-align: right;">{{wharfage}}</td>
-        <td style="text-align: right;">54-158</td>
-    </tr>
-                    <tr style="padding: 3px;">
+        <tr style="padding: 3px;">
+            <td>WHARFAGE (LCT/ FWQ)</td>
+            <td style="text-align: right;">{{wharfage}}</td>
+            <td style="text-align: right;">54-158</td>
+        </tr>
+        <tr style="padding: 3px;">
             <td>SINDH SALES TAX (S.S.T)</td>
             <td style="text-align: right; width: 25%;">{{sst|floatformat:0}}</td>
             <td style="text-align: right;">48-285</td>
@@ -169,17 +190,27 @@
             <td style="text-align: right; padding: 3px;">59-303</td>
         </tr>
         <tr style="padding: 3px;">
-        <td><b>TOTAL:</b>   </td>
-        <td style="text-align: right;"><b>{{lc.pqaCharges|floatformat:0}}</b></td>
-        <td style="border-bottom: 0px solid black;">  </td>
-    </tr>
+            <td><b>TOTAL:</b> </td>
+            <td style="text-align: right;"><b>{{lc.pqaCharges|floatformat:0}}</b></td>
+            <td style="border-bottom: 0px solid black;"> </td>
+        </tr>
     </table>
-
-    <table style="border: 0px solid black; padding: 0px;">
-
+    <br><br>
+    <b>RUPEES: (<u>{{inwords|upper}} ONLY</u>)</b>
+    <br><br><br><br>
+    <table>
+        <tr>
+            <td>
+                <center>Bank Office <br> <br>stamp</center>
+            </td>
+            <td>
+                <center>Deputy Manager Revenue <br><br>PORT QASIM AUTHORITY</center>
+            </td>
+            <td>
+                <center>Cahier <br> <br>PORT QASIM AUTHORITY</center>
+            </td>
+        </tr>
     </table>
-
-
 </body>
 
 </html>
