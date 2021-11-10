@@ -1,4 +1,5 @@
 {% load ex %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +13,7 @@
     @page {
         size: letter portrait;
         margin: 1cm;
-        background-color: brown;
+        ;
     }
 
     body {
@@ -30,7 +31,7 @@
         padding: 3px;
     }
 
-    .td-bg-color {
+    .tkd-bg-color {
         background-color: #0ed5ce;
         border: 1px solid black;
     }
@@ -97,14 +98,14 @@
         {% else %}
             <td>Quantity: <b>{{bl.quantity|floatformat:3}} M.Tons</b></td>
         {% endif %}
-            <td>Declared Value: <b>$ {{bl.lc.dv|floatformat:2}}</b></td>
-            <td>Assessed Value: <b>$ {{bl.lc.av|floatformat:2}}</b></td>
+            <td>Declared Value: <b>$ {{bl.lc.dv|floatformat:2|intcomma}}</b></td>
+            <td>Assessed Value: <b>$ {{bl.lc.av|floatformat:2|intcomma}}</b></td>
         </tr>
         <tr></tr>
         <tr>
-            <td>Insurance: <b>PKR. {{bl.insurance|floatformat:0}}</b></td>
-            <td>Exchange Rate: <b>{{bl.lc.exRate|floatformat:2}}</b></td>
-            <td>Import Value: <b>PKR. {{bl.importValuePKR|floatformat:0}}</b></td>
+            <td>Insurance: <b>PKR. {{bl.insurance|floatformat:0|intcomma}}</b></td>
+            <td>Exchange Rate: <b>{{bl.lc.exRate|floatformat:2|intcomma}}</b></td>
+            <td>Import Value: <b>PKR. {{bl.importValuePKR|floatformat:0|intcomma}}</b></td>
         </tr>
     </table>
     <hr>
@@ -124,7 +125,7 @@
                 <p>COLLECTOR OF CUSTOM PORT QASIM A/C <b>(Importer Name & NTN {{lc.client.NTN}}) </b></p>
             </td>
             <td style="text-align:center; width:10%;">0.25 %</td>
-            <td style="text-align:center; border:0px; font-size:12px;"><b>{{bl.warehousingCharges|floatformat:0}} X
+            <td style="text-align:center; border:0px; font-size:12px;"><b>{{bl.warehousingCharges|floatformat:0|intcomma}} X
                     {{ dups|get_value:bl.quantity }}</b></td>
         </tr>
 
@@ -133,7 +134,7 @@
         <tr>
             <td style="width:75%;"></td>
             <td style="text-align:center; width:15%;"></td>
-            <td style="text-align:center; border:1px solid black; font-size:12px;"><b>{{bl.warehousingCharges|floatformat:0}} X
+            <td style="text-align:center; border:1px solid black; font-size:12px;"><b>{{bl.warehousingCharges|floatformat:0|intcomma}} X
                     {{ dups|get_value:bl.quantity }}</b></td>
         </tr>
 
@@ -143,22 +144,20 @@
 
         <tr></tr>
         {% for bl in bls %}
-        {% ifchanged bl.excise|floatformat:0 %}
+        {% ifchanged bl.excise|floatformat:0|intcomma %}
         {% if forloop.counter == 1 %}
 
         <tr>
             <td>EXCISE & TAXATION OFFICER PORT QASIM A/C <b>(Importer Name & NTN {{lc.client.NTN}}) </b></td>
             <td style="text-align:center; width:15%;">1.25 %</td>
-            <td style="text-align:center; border:0px; font-size:12px;">{{bl.excise|floatformat:0}} X
-                {{ dups|get_value:bl.quantity }}</td>
+            <td style="text-align:center; border:0px; font-size:12px;"><b>{{bl.excise|floatformat:0|intcomma}}X{{ dups|get_value:bl.quantity }}</b></td>
         </tr>
 
         {% else %}
         <tr>
             <td></td>
             <td style="text-align:center; width:15%;"></td>
-            <td style="text-align:center; border:0px; font-size:12px;">{{bl.excise|floatformat:0}} X
-                {{ dups|get_value:bl.quantity }}</td>
+            <td style="text-align:center; border:0px; font-size:12px;"><b>{{bl.excise|floatformat:0|intcomma}}X{{ dups|get_value:bl.quantity }}</b></td>
         </tr>
 
         {% endif %}
@@ -169,20 +168,20 @@
         <tr>
             <td>ASSISTANT SUPERITENDENT OF STAMPS PORT QASIM A/C <b>({{lc.client}})</b></td>
             <td style="text-align:center; width:15%;"></td>
-            <td style="text-align:center; border:0px; font-size:12px;"><b>1000 X {{lc.totalBL}}</b></td>
+            <td style="text-align:center; border:0px; font-size:12px;"><b>1,000 X {{lc.totalBL}}</b></td>
         </tr>
         <tr></tr>
         <tr>
             <td>PORT QASIM AUTHORITY A/C <b>({{lc.client}})</b></td>
             <td style="text-align:center; width:15%;">Rs. 31 PMT, 13% F.E.D</td>
-            <td style="text-align:center; border:0px;font-size:12px;"><b>{{lc.pqaCharges|floatformat:0}}</b></td>
+            <td style="text-align:center; border:0px;font-size:12px;"><b>{{lc.pqaCharges|floatformat:0|intcomma}}</b></td>
         </tr>
         <tr></tr>
         {% if lc.psqc %}
         <tr>
             <td>PSQCA-SDC IMPORT/EXPORT A/C <b>({{lc.client}})</b></td>
             <td style="text-align:center; width:15%;"></td>
-            <td style="text-align:center; border:0px;font-size:12px;"><b>{{psqc}}</b></td>
+            <td style="text-align:center; border:0px;font-size:12px;"><b>{{psqc|intcomma}}</b></td>
         </tr>
         {% endif %}
         <tr></tr>

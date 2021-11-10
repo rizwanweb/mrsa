@@ -1,4 +1,4 @@
-#!/home/riz/Django/mrsa/env/bin/python
+#!/home/mrsa/Desktop/mrsa/env/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
