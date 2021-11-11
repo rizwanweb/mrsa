@@ -13,6 +13,23 @@
     @page {
         size: letter portrait;
         margin: 3cm;
+        @frame header_frame {
+            -pdf-frame-content: header_content;
+            left: 50pt; width: 512pt; top: 40pt; height: 100pt;
+        }
+        @frame content_frame {
+            left: 50pt;
+            width: 512pt;
+            top: 150pt;
+            height: 500pt;
+            -pdf-frame-border: 1;    /* for debugging the layout */
+            padding: 20px;
+        }
+
+        @frame footer_frame {           /* Another static Frame */
+            -pdf-frame-content: footer_content;
+            left: 50pt; width: 512pt; top: 660pt; height: 75pt;
+        }
         
     }
 
@@ -33,17 +50,17 @@
 </style>
 
 <body>
-
-<div class="container">
+<header>
+<div id="header_content" class="container">
     <center><u><h1 style="margin-bottom: 0px;">M.R. SHIPPING AGENCY PVT LTD</h1></u></center>
     <center><h2 style="margin: 0px;">CLEARING FORWARDING & SHIPPING AGENT</h2></center>
     <center><h2 style="margin-top: 0px;">C.H.A.L. NO. 1509</h2></center>
 </div>    
-
+</header>
 <br>
 <br>
 <div>
-        <p style="margin: 0px;">THE DIRECTOR CARGO (OPS)</p>
+        <p style="margin: 0px;">THE DIRECTOR CARGO <b>(OPS)</b></p>
         <p style="margin: 0px;">PORT QASIM AUTHORITY,</p>
         <p style="margin: 0px;"><u>PORT QASIM</u></p>
 </div>
@@ -53,16 +70,16 @@
         <table style="border:0px solid black;">
             <tr>
                 <td style="width: 30%;">QUANTITY</td>
-                <td style="width: 25%;"><b>{{lc.totalQuantity}}X{{lc.totalBL}}</b></td>
+                <td style="width: 25%;"><b>{{lc.totalQuantity|floatformat:3}}X{{lc.totalBL}}</b></td>
                 <td style="width: 20%;">DESC</td>
-                <td style="width: 40%;"><b>{{lc.item}}</b></td>
+                <td style="width: 40%;"><b>{{lc.item}} (IN BULK)</b></td>
             </tr>
 
             <tr>
                 <td>VESSEL</td>
                 <td><b>{{lc.vessel}}</b></td>
                 <td>IGM NO.</td>
-                <td><b>{{lc.igm}}</b></td>
+                <td><b>PQIB-{{lc.igm}}/YEAR</b></td>
             </tr>
 
             <tr>
@@ -74,7 +91,7 @@
 
             <tr>
                 <td>TERMINAL NAME</td>
-                <td><b>{% if lc.totalBL > 1 %}{% for bl in bls %}{{bl.terminal.licenseNumber}}--{{bl.terminal}},<br>{% endfor %} {% else %}{% for bl in bls %}{{bl.terminal.licenseNumber}}--{{bl.terminal}}{% endfor %}{% endif %}</b></td>
+                <td><b>{% if lc.totalBL > 1 %}{% for bl in bls %}{{bl.terminal.licenseNumber}}-{{bl.terminal}},<br>{% endfor %} {% else %}{% for bl in bls %}{{bl.terminal.licenseNumber}}-{{bl.terminal}}{% endfor %}{% endif %}</b></td>
                 <td>B/L NO.</td>
                 <td><b>{% if lc.totalBL > 1 %}{% for bl in bls %}{{bl.blNo}}<br>{% endfor %} {% else %}{% for bl in bls %}{{bl.blNo}}{% endfor %}{% endif %}</b></td>
             </tr>
@@ -83,13 +100,23 @@
         <p>A/C: <b><u>{{lc.client}}</u></b></p>
         <p style="font-size: 16px; margin-bottom: 0px;">Dear Sir,</p>
         <p style="font-size: 16px;">
-        Kindly allow us to dispatch of the Cargo in the completion of Custom and Port Qasim Authority formilities.
+        Kindly allow us to dispatch of the Cargo after the completion of Custom and Port Qasim Authority formilities.
         </p>
         <p>Thanking You,</p>
         <p>Yours Faithfully,</p>
         <p>For: <b>M.R. SHIPPING AGENCY (PVT) LTD</b></p>
     </div>
     </div>
+
+    <footer>
+    <div id="footer_content">
+    <center><p style="line-height: 0px;">OFFICE # 5, Mezzanine Floor, Sutli Plaza, Young Husband Road, Near Madina Masjid Kharadar</p>
+    <p style="line-height: 0px;">Karachi-74000</p>
+    <p style="line-height: 0px;">PHONE NO: 32203781-32313948 FAX NO: (92-21)32313977</p>
+    </center>
+
+    </div>
+    </footer>
 </body>
 
 </html>

@@ -14,6 +14,8 @@ class Client(models.Model):
     city = models.CharField(max_length=50, null=True, blank=True)
     NTN = models.CharField(max_length=20)
     GST = models.CharField(max_length=20)
+    director = models.CharField(max_length=100, null=True, blank=True)
+    nic = models.CharField(max_length=20, null=True, blank=True)
 
     # #Exemptions
     # customDuty = models.BooleanField(default=True) 

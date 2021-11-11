@@ -1,7 +1,7 @@
 import math
 from django.db import models
 from django.db.models import Sum
-
+from datetime import date
 from base.models import Port, Terminal
 #from bl.models import BL
 from clients.models import Client
@@ -40,15 +40,17 @@ class LC(models.Model):
 
     billed = models.BooleanField(default=False)
     psqc = models.BooleanField(default=False)
+    igmNo = models.CharField(max_length=20, null=True, blank=True)
 
     class Meta:
-        ordering = ['igm']
+        ordering = ['-igm']
 
     def save(self, *args, **kwargs):
         quantity = math.ceil(self.totalQuantity)
         pcharges = quantity * self.pqaRate
         pcharges += pcharges * (self.fed / 100)
         self.pqaCharges = round(pcharges)
+        self.igmNo = str(self.igm) +'/'+ str(self.igmDate.year)
         super().save(*args, **kwargs)
 
     # def get_sum_of_bl(self):
