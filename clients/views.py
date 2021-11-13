@@ -13,7 +13,7 @@ class AddClientView(CreateView):
     form_class = AddClientForm
     template_name = 'clients/add_client.html'
     context_object_name = 'client'
-    success_url = reverse_lazy('client_list')
+    success_url = reverse_lazy('add_client')
 
 
 

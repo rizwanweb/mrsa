@@ -4,7 +4,7 @@ from django.db import models
 
 class Client(models.Model):
 
-    name = models.CharField(max_length=200)
+    name = models.CharField(unique=True, max_length=200)
     person = models.CharField(max_length=200)
     mobile = models.CharField(max_length=200, null=True, blank=True)
     phone = models.CharField(max_length=200, null=True, blank=True)
@@ -17,9 +17,6 @@ class Client(models.Model):
     director = models.CharField(max_length=100, null=True, blank=True)
     nic = models.CharField(max_length=20, null=True, blank=True)
 
-    # #Exemptions
-    # customDuty = models.BooleanField(default=True) 
-    # incomeTax = models.BooleanField(default=True)
 
 
 
