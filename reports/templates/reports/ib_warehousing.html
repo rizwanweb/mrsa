@@ -8,64 +8,70 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculation Sheet</title>
-<style type="text/css">
-    @page {
-        size: letter portrait;
-        margin: 1cm;
-        @frame content_frame {
-            left: 50pt;
-            width: 512pt;
-            top: 50pt;
-            height: 692pt;
-            padding: 20px;
-            -pdf-frame-border: 2;    /* for debugging the layout */
+    <style type="text/css">
+        @page {
+            size: letter portrait;
+            margin: 1cm;
+
+            @frame content_frame {
+                left: 50pt;
+                width: 512pt;
+                top: 50pt;
+                height: 692pt;
+                padding: 20px;
+                -pdf-frame-border: 2;
+                /* for debugging the layout */
+            }
+
+            @frame footer_frame {
+                /* Another static Frame */
+                -pdf-frame-content: footer_content;
+                left: 50pt;
+                width: 512pt;
+                top: 772pt;
+                height: 20pt;
+            }
         }
 
-        @frame footer_frame {           /* Another static Frame */
-            -pdf-frame-content: footer_content;
-            left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+        body {
+            font-size: 12px;
+            border: 0px solid black;
         }
-    }
 
-    body {
-        font-size: 12px;
-        border: 0px solid black;
-    }
+        h1 {
+            font-size: 36px;
+            text-align: center;
+        }
 
-    h1 {
-        font-size: 36px;
-        text-align: center;
-    }
+        cal-table {
+            border-top: 1px;
+            padding: 3px;
+        }
 
-    cal-table {
-        border-top: 1px;
-        padding: 3px;
-    }
+        .tkd-bg-color {
+            background-color: #0ed5ce;
+            border: 1px solid black;
+        }
 
-    .tkd-bg-color {
-        background-color: #0ed5ce;
-        border: 1px solid black;
-    }
-    .center {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-    }
-
-</style>
+        .center {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
 </head>
 
 
 
 <body>
-<header>
-<center>
-        <h1>M.R.SHIPPING AGENCY PVT LTD</h1>
-    </center>
-</header>
+    <header>
+        <center>
+            <h1>M.R.SHIPPING AGENCY PVT LTD</h1>
+        </center>
+    </header>
     <table>
         <tr>
             <td style="width:20%;">{% now "M-d-Y" %}</td>
@@ -76,8 +82,8 @@
             </td>
             <td></td>
         </tr>
-        </table>
-        <table>
+    </table>
+    <table>
         <tr></tr>
         <tr>
             <td><b>M/s. {{lc.client}}</b></td>
@@ -96,11 +102,13 @@
         <tr></tr>
         <tr>
             <td style="width: 20%;">Reference:</td>
-            <td class="td-bg-color" style="width: 60%; border-bottom: 0px;"><b>{{lc.totalQuantity}} M.Tons, {{lc.item}}, M.T. {{lc.vessel}}</b></td>
+            <td class="td-bg-color" style="width: 60%; border-bottom: 0px;"><b>{{lc.totalQuantity}} M.Tons, {{lc.item}},
+                    M.T. {{lc.vessel}}</b></td>
         </tr>
         <tr>
             <td></td>
-            <td class="td-bg-color"><b>IGM No. {{lc.igm}}/2021, Dated: {{lc.igmDate}}, Index No. {% for bl in bls %}{{bl.index}},{% endfor %}</b></td>      
+            <td class="td-bg-color"><b>IGM No. {{lc.igm}}/2021, Dated: {{lc.igmDate}}, Index No.
+                    {% for bl in bls %}{{bl.index}},{% endfor %}</b></td>
         </tr>
         <tr>
             <td></td>
@@ -120,11 +128,11 @@
     <table>
 
         <tr>
-        {% if bl.lc.totalBL > 1 %}
+            {% if bl.lc.totalBL > 1 %}
             <td>Quantity: <b>{{bl.quantity|floatformat:3}} M.Tons X {{ dups|get_value:bl.quantity }} </b></td>
-        {% else %}
+            {% else %}
             <td>Quantity: <b>{{bl.quantity|floatformat:3}} M.Tons</b></td>
-        {% endif %}
+            {% endif %}
             <td>Declared Value: <b>$ {{bl.lc.dv|floatformat:2|intcomma}}</b></td>
             <td>Assessed Value: <b>$ {{bl.lc.av|floatformat:2|intcomma}}</b></td>
         </tr>
@@ -141,7 +149,7 @@
     {% endfor %}
     <br>
 
-    <table style="font-size:10px; border:1px;">
+    <table style="font-size:10px; border:0px;">
 
         {% for bl in bls %}
         {% ifchanged bl.warehousingCharges %}
@@ -152,8 +160,10 @@
                 <p>COLLECTOR OF CUSTOM PORT QASIM A/C <b>(Importer Name & NTN {{lc.client.NTN}}) </b></p>
             </td>
             <td style="text-align:center; width:10%;">0.25 %</td>
-            <td style="text-align:right; border:0px; font-size:12px; width:15%;"><b>{{bl.warehousingCharges|floatformat:0|intcomma}}</b></td>
-            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px;"><b> X {{ dups|get_value:bl.quantity }}</b></td>
+            <td style="text-align:right; border:0px; font-size:12px; width:15%;">
+                <b>{{bl.warehousingCharges|floatformat:0|intcomma}}</b></td>
+            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px;"><b> X
+                    {{ dups|get_value:bl.quantity }}</b></td>
         </tr>
 
         {% else %}
@@ -161,8 +171,10 @@
         <tr>
             <td style="width:75%;"></td>
             <td style="text-align:center; width:15%;"></td>
-            <td style="text-align:right; border:0px; font-size:12px; width:15%;"><b>{{bl.warehousingCharges|floatformat:0|intcomma}}</b></td>
-            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px;"><b> X {{ dups|get_value:bl.quantity }}</b></td>
+            <td style="text-align:right; border:0px; font-size:12px; width:15%;">
+                <b>{{bl.warehousingCharges|floatformat:0|intcomma}}</b></td>
+            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px;"><b> X
+                    {{ dups|get_value:bl.quantity }}</b></td>
         </tr>
 
         {% endif %}
@@ -177,16 +189,20 @@
         <tr>
             <td>EXCISE & TAXATION OFFICER PORT QASIM A/C <b>(Importer Name & NTN {{lc.client.NTN}}) </b></td>
             <td style="text-align:center; width:10%;">0.25 %</td>
-            <td style="text-align:right; border:0px; font-size:12px; width:15%;"><b>{{bl.excise|floatformat:0|intcomma}}</b></td>
-            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px;"><b> X {{ dups|get_value:bl.quantity }}</b></td>
+            <td style="text-align:right; border:0px; font-size:12px; width:15%;">
+                <b>{{bl.excise|floatformat:0|intcomma}}</b></td>
+            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px;"><b> X
+                    {{ dups|get_value:bl.quantity }}</b></td>
         </tr>
 
         {% else %}
         <tr>
             <td></td>
             <td style="text-align:center; width:15%;"></td>
-            <td style="text-align:right; border:0px; font-size:12px; width:15%;"><b>{{bl.excise|floatformat:0|intcomma}}</b></td>
-            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px;"><b> X {{ dups|get_value:bl.quantity }}</b></td>
+            <td style="text-align:right; border:0px; font-size:12px; width:15%;">
+                <b>{{bl.excise|floatformat:0|intcomma}}</b></td>
+            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px;"><b> X
+                    {{ dups|get_value:bl.quantity }}</b></td>
         </tr>
 
         {% endif %}
@@ -203,9 +219,12 @@
         <tr></tr>
         <tr>
             <td style="width:65%;">PORT QASIM AUTHORITY A/C <b>({{lc.client}})</b></td>
-            <td style="text-align:center; width:20%;">Rs. {{lc.pqaRate|floatformat:0}} PMT, {{lc.fed|floatformat:0}}% F.E.D</td>
-            <td style="text-align:right; border:0px; font-size:12px; width:15%;"><b>{{lc.pqaCharges|floatformat:0|intcomma}}</b></td>
-            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px; width:5%;"><b> X {{lc.totalBL}}</b></td>
+            <td style="text-align:center; width:20%;">Rs. {{lc.pqaRate|floatformat:0}} PMT, {{lc.fed|floatformat:0}}%
+                F.E.D</td>
+            <td style="text-align:right; border:0px; font-size:12px; width:15%;">
+                <b>{{lc.pqaCharges|floatformat:0|intcomma}}</b></td>
+            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px; width:5%;"><b> X
+                    {{lc.totalBL}}</b></td>
 
         </tr>
         <tr></tr>
@@ -213,9 +232,10 @@
         <tr>
             <td>PSQCA-SDC IMPORT/EXPORT A/C <b>({{lc.client}})</b></td>
             <td style="text-align:center; width:20%;"></td>
-            <td style="text-align:center; border:0px;font-size:12px; width:20%;"><b>{{psqc|intcomma}}</b></td>
-            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px;"><b> X {{lc.totalBL}}</b></td>
-            
+            <td style="text-align:right; border:0px;font-size:12px; width:15%;"><b>{{psqc|intcomma}}</b></td>
+            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px; width: 5%"><b> X
+                    {{lc.totalBL}}</b></td>
+
         </tr>
         {% endif %}
         <tr></tr>
@@ -223,12 +243,52 @@
         <tr>
             <td>For: <b>M.R.SHIPPING AGENCY PVT LIMITED</b></td>
         </tr>
-        <tr></tr>
+
+    </table>
+    <br>
+    <table style="font-size: 10px;">
         <tr>
-            <td>Note: <span style="background-color: lightgray;">IT IS INFORMED THAT WITHOUT REQUIRED DOCUMENTS IB GD
-                    COULD NOT BE FILED.</span></td>
+            <td style="width: 10%; font-size: 12px; text-align:justify;"><b>Note:</b></td>
+            <td style="background-color: lightgray;">
+                <span>IT IS INFORMED THAT WITHOUT REQUIRED DOCUMENTS IB GD
+                    COULD NOT BE FILED.</span>
+            </td>
+            <td style="width: 20%"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="background-color: lightgray; font-size: 10px;"><u>REQUIRED DOCUMENTS:</u></td>
         </tr>
 
+        <tr>
+            <td></td>
+            <td style="background-color: lightgray; font-size: 10px;">LETTER OF CREDIT</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td style="background-color: lightgray;">INSURANCE POLICY WITH PREMIUM</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td style="background-color: lightgray;">PVMA (ATTESTED DOCUMENTS) ON RBD PALM OIL, OLIEN, CPO & C.D.SOYABEAN OIL</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td style="background-color: lightgray;">FTA (ORIGIN CERTIFICATE) IN ORIGINAL</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td style="background-color: lightgray;">TEMPORARY RELEASE CERTIFICATE ISSUED BY PSQCA</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td style="background-color: lightgray;">TEST REPORT ISSUED BY CUSTOM LAB.</td>
+        </tr>
     </table>
 </body>
 

@@ -21,7 +21,7 @@
     </thead>
     <tbody style="font-size: 12px;">
     {% for client in clients %}
-    
+    {% if client.director and client.nic %}
     <tr>
         <td>{{forloop.counter}}</td>
         <td>{{client.name}}</td>
@@ -33,6 +33,19 @@
         <td><a class="btn btn-primary btn-sm" href="{% url 'update_client' client.id %}">EDIT</a></td>
         <td><a class="btn btn-primary btn-sm" href="{% url 'client_detail' client.id %}">VIEW</a></td>
     </tr>
+    {% else %}
+        <tr style="background-color: red">
+        <td>{{forloop.counter}}</td>
+        <td>{{client.name}}</td>
+        <td>{{client.person}}</td>
+        <td>{{client.mobile}}</td>
+        <td>{{client.phone}}</td>
+        <td>{{client.email}}</td>
+        <td>{{client.city}}</td>
+        <td><a class="btn btn-primary btn-sm" href="{% url 'update_client' client.id %}">EDIT</a></td>
+        <td><a class="btn btn-primary btn-sm" href="{% url 'client_detail' client.id %}">VIEW</a></td>
+    </tr>
+    {% endif %}
         {% endfor %}
     </tbody>
 </table>

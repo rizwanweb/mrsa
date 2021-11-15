@@ -33,19 +33,6 @@
             <td>{{bl.quantity}}</td>
             <td>{{bl.lc.igm}}{{bl.lc.igmDate|date:'/y'}}</td>
             <td class="text-center"></td>
-            <td>
-                <div class="dropdown">
-                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Actions
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="">Print Calculation Sheet</a></li>
-                        <li><a class="dropdown-item" href="">NOC Sheet</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div>
-            </td>
             <td><a class="btn btn-sm btn-info" href="{% url 'add_terminal' bl.id %}">Add Terminal</a></td>
         </tr>
         {% endif %}
