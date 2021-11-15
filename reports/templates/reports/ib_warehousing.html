@@ -149,34 +149,34 @@
     {% endfor %}
     <br>
 
-    <table style="font-size:10px; border:0px;">
+    <table style="font-size:9px; border:0px;">
 
         {% for bl in bls %}
         {% ifchanged bl.warehousingCharges %}
+        {% if bl.warehousingCharges > 195000 %}
+        {% comment %} Dont render anything {% endcomment %}
+        {% else %}
         {% if forloop.counter == 1 %}
-
         <tr style="line-height: 15px;" class="center">
-            <td style="width:65%;">
+            <td style="width:75%;">
                 <p>COLLECTOR OF CUSTOM PORT QASIM A/C <b>(Importer Name & NTN {{lc.client.NTN}}) </b></p>
             </td>
-            <td style="text-align:center; width:10%;">0.25 %</td>
-            <td style="text-align:right; border:0px; font-size:12px; width:15%;">
+            <td style="text-align:right; width:10%;">{{bl.whRate}} %</td>
+            <td style="text-align:right; border:0px; font-size:12px; width:10%;">
                 <b>{{bl.warehousingCharges|floatformat:0|intcomma}}</b></td>
-            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px;"><b> X
+            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px; width:10%"><b> X
                     {{ dups|get_value:bl.quantity }}</b></td>
         </tr>
-
         {% else %}
-
         <tr>
             <td style="width:75%;"></td>
-            <td style="text-align:center; width:15%;"></td>
+            <td style="text-align:right; width:5%;"></td>
             <td style="text-align:right; border:0px; font-size:12px; width:15%;">
                 <b>{{bl.warehousingCharges|floatformat:0|intcomma}}</b></td>
             <td style="text-align:left; border:0px; font-size:12px; padding-left:2px;"><b> X
                     {{ dups|get_value:bl.quantity }}</b></td>
         </tr>
-
+        {% endif %}
         {% endif %}
         {% endifchanged %}
         {% endfor %}
@@ -184,67 +184,81 @@
         <tr></tr>
         {% for bl in bls %}
         {% ifchanged bl.excise|floatformat:0|intcomma %}
+        {% if bl.warehousingCharges > 195000 %}
+        {% else %}
         {% if forloop.counter == 1 %}
-
+        
         <tr>
-            <td>EXCISE & TAXATION OFFICER PORT QASIM A/C <b>(Importer Name & NTN {{lc.client.NTN}}) </b></td>
-            <td style="text-align:center; width:10%;">0.25 %</td>
-            <td style="text-align:right; border:0px; font-size:12px; width:15%;">
+            <td style="width:75%;">EXCISE & TAXATION OFFICER PORT QASIM A/C <b>(Importer Name & NTN {{lc.client.NTN}})(ETO 100% Bank Guarantee)</b></td>
+            <td style="text-align:right; width:5%;">{{bl.exciseRate}} %</td>
+            <td style="text-align:right; border:0px; font-size:12px; width:15%; background-color:lightgreen;">
                 <b>{{bl.excise|floatformat:0|intcomma}}</b></td>
-            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px;"><b> X
+            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px; background-color:lightgreen;"><b> X
                     {{ dups|get_value:bl.quantity }}</b></td>
         </tr>
-
         {% else %}
         <tr>
             <td></td>
-            <td style="text-align:center; width:15%;"></td>
-            <td style="text-align:right; border:0px; font-size:12px; width:15%;">
+            <td style="text-align:center; width:5%;"></td>
+            <td style="text-align:right; border:0px; font-size:12px; width:15%; background-color:lightgreen;">
                 <b>{{bl.excise|floatformat:0|intcomma}}</b></td>
-            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px;"><b> X
+            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px; background-color:lightgreen;"><b> X
                     {{ dups|get_value:bl.quantity }}</b></td>
         </tr>
 
         {% endif %}
+        
+        {% endif %}
+
         {% endifchanged %}
         {% endfor %}
         <tr></tr>
 
+        {% for bl in bls %}
+        {% if bl.warehousingCharges > 195000 %}
+        {% comment %} Dont render anything {% endcomment %}
+        {% else %}
+        {% if forloop.counter == 1 %}
         <tr>
-            <td>ASSISTANT SUPERITENDENT OF STAMPS PORT QASIM A/C <b>(Importer Name)</b></td>
-            <td style="text-align:center; width:10%;"></td>
+            <td style="width:75%;">ASSISTANT SUPERITENDENT OF STAMPS PORT QASIM A/C <b>(Importer Name)</b></td>
+            <td style="text-align:center; width:5%;"></td>
             <td style="text-align:right; border:0px; font-size:12px; width:15%;"><b>1000</b></td>
             <td style="text-align:left; border:0px; font-size:12px; padding-left:2px;"><b> X {{lc.totalBL}}</b></td>
         </tr>
+        {% endif %}
+        
+        {% endif %}
+        {% endfor %}
+
+
+
+
         <tr></tr>
         <tr>
-            <td style="width:65%;">PORT QASIM AUTHORITY A/C <b>({{lc.client}})</b></td>
-            <td style="text-align:center; width:20%;">Rs. {{lc.pqaRate|floatformat:0}} PMT, {{lc.fed|floatformat:0}}%
-                F.E.D</td>
+            <td style="width:75%;">PORT QASIM AUTHORITY A/C <b>({{lc.client}}) Rs. {{lc.pqaRate|floatformat:0}} PMT, {{lc.fed|floatformat:0}}% F.E.D</b></td>
+            <td style="text-align:center; width:5%;"></td>
             <td style="text-align:right; border:0px; font-size:12px; width:15%;">
                 <b>{{lc.pqaCharges|floatformat:0|intcomma}}</b></td>
             <td style="text-align:left; border:0px; font-size:12px; padding-left:2px; width:5%;"><b> X
                     {{lc.totalBL}}</b></td>
 
         </tr>
-        <tr></tr>
+       
         {% if lc.psqc %}
         <tr>
-            <td>PSQCA-SDC IMPORT/EXPORT A/C <b>({{lc.client}})</b></td>
-            <td style="text-align:center; width:20%;"></td>
-            <td style="text-align:right; border:0px;font-size:12px; width:15%;"><b>{{psqc|intcomma}}</b></td>
-            <td style="text-align:left; border:0px; font-size:12px; padding-left:2px; width: 5%"><b> X
-                    {{lc.totalBL}}</b></td>
+            <td style="width:95%">PSQCA-SDC IMPORT/EXPORT A/C <b>({{lc.client}})</b></td>
+            <td style="text-align:center; width:15%;"> </td>
+            <td style="text-align:right; border:0px;font-size:12px; width:10%;"><b>{{psqc|intcomma}}</b></td>
+            <td style="text-align:right; border:0px; font-size:12px; padding-left:0px; width: 5%"><b>
+                    </b></td>
 
         </tr>
         {% endif %}
-        <tr></tr>
-        <tr></tr>
-        <tr>
-            <td>For: <b>M.R.SHIPPING AGENCY PVT LIMITED</b></td>
-        </tr>
 
     </table>
+    <br>
+    For: <b>M.R.SHIPPING AGENCY PVT LIMITED</b>
+    <br>
     <br>
     <table style="font-size: 10px;">
         <tr>
@@ -253,7 +267,7 @@
                 <span>IT IS INFORMED THAT WITHOUT REQUIRED DOCUMENTS IB GD
                     COULD NOT BE FILED.</span>
             </td>
-            <td style="width: 20%"></td>
+            <td style="width: 20%"> </td>
         </tr>
         <tr>
             <td></td>
