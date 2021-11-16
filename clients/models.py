@@ -17,6 +17,8 @@ class Client(models.Model):
     director = models.CharField(max_length=100, null=True, blank=True)
     nic = models.CharField(max_length=20, null=True, blank=True)
 
+    eto = models.BooleanField(default=True)
+
 
 
 

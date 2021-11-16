@@ -68,6 +68,10 @@
             <label for="">Director NIC #:</label>
             {% render_field form.nic class="form-control" %}
         </div>
+        <div class="col-md-4">
+            <label for="">Bank Guarantee:</label>
+            {% render_field form.eto class="form-check-input" %}
+        </div>
 
         <button class="btn btn-primary" type="submit">Save</button>
     </form>

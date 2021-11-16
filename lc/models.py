@@ -21,7 +21,7 @@ class LC(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     lcNo = models.CharField(max_length=100)
-    lcDate = models.DateField()
+    lcDate = models.DateField(null=True, blank=True)
     totalQuantity = models.FloatField()
     vessel = models.CharField(max_length=100)
     igm = models.IntegerField()
